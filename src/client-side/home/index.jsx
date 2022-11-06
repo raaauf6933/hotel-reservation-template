@@ -17,6 +17,7 @@ import { WindowTitle } from "../../admin/components/WindowTitle/WindowTitle";
 import { resortName } from "./../../config";
 import bookingContext from "../context/booking/bookingContext";
 import AppLayout from "../components/AppLayout";
+import ReviewsSection from "../components/ReviewsSection";
 
 const Home = () => {
   const { navbarDispatch } = React.useContext(navbarContext);
@@ -39,7 +40,7 @@ const Home = () => {
 
           <DatePickerSection />
           <ServiceSection />
-
+          <ReviewsSection />
           {/* <SectionLabel title="Best of Our Rooms" />
 
         <div style={{ display: "flex", justifyContent: "center" }}>

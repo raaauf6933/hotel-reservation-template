@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import RoomItems from "../components/RoomItems";
 import { Card, CardContent, Divider } from "@mui/material";
 // import PaginationComponent from "../../components/Pagination";
@@ -19,7 +19,7 @@ import apiAxios from "./../../../apiAxios";
 
 const SelectRooms = ({ params, navigate }) => {
   // const [state, setState] = React.useState({ currentPage: 1, pageSize: 3 });
-  const [rooms, setRooms] = React.useState([]);
+  const [rooms, setRooms] = React.useState();
   const { bookingState } = React.useContext(bookingContext);
   const { room_details: roomContext } = bookingState;
 
@@ -35,6 +35,9 @@ const SelectRooms = ({ params, navigate }) => {
       const result = await apiAxios({
         url: GET_AVAILABLE_ROOMTYPE,
         method: "POST",
+        params: {
+          guest: bookingState.guest.no_guest,
+        },
         data: dates,
       });
 
@@ -83,7 +86,9 @@ const SelectRooms = ({ params, navigate }) => {
           <Grid container item xs={12} sm={8} spacing={2}>
             <Card style={{ width: "100%", height: "fit-content" }}>
               <CardContent>
-                {rooms.length !== 0 ? (
+                {!rooms ? (
+                  <CardLoadingSpinner />
+                ) : rooms.length !== 0 ? (
                   rooms.map((room, index, array) => {
                     if (index === array.length - 1) {
                       return (
@@ -121,7 +126,16 @@ const SelectRooms = ({ params, navigate }) => {
                     }
                   })
                 ) : (
-                  <CardLoadingSpinner />
+                  <>
+                    <Typography
+                      style={{
+                        textAlign: "center",
+                      }}
+                    >
+                      No Available Rooms
+                    </Typography>
+                  </>
+                  // <CardLoadingSpinner />
                 )}
               </CardContent>
             </Card>

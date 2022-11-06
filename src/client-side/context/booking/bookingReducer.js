@@ -35,6 +35,9 @@ const bookingReducer = (state, action) => {
       );
       newState.room_details = tempRemove;
       break;
+    case "SET_GUEST_NO":
+      newState.guest = { ...newState.guest, no_guest: payload };
+      break;
     case "SET_GUEST_DETAILS":
       newState.guest = { ...newState.guest, ...payload };
       break;

@@ -5,6 +5,8 @@ import AppStateContext from "../../context/AppState/context";
 const AppStateProgress = () => {
   const { appState } = React.useContext(AppStateContext);
 
+  console.log(appState.displayLoader);
+
   return (
     <LinearProgress
       style={{

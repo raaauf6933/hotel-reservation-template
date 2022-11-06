@@ -119,7 +119,7 @@ const ServiceSection = (props) => {
         
             </Typography> */}
           </Fade>
-          <video width="100%" height="50%" ref={videoElement}>
+          <video width="100%" height="50%" ref={videoElement} muted controls>
             <source
               src="https://res.cloudinary.com/dlqsqlkws/video/upload/v1645021426/resort_video_compressed_c4qhng.mp4"
               type="video/mp4"

@@ -41,7 +41,6 @@ const GuestDetailsView = ({ navigate, params }) => {
     last_name,
     email,
     contact_number,
-    no_guest,
     street_address,
     province,
     city,
@@ -161,7 +160,7 @@ const GuestDetailsView = ({ navigate, params }) => {
                   </Grid>
                 </Grid>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} sm={4}>
+                  <Grid item xs={12} sm={12}>
                     <Box>
                       <TextField
                         label="Email"
@@ -181,7 +180,7 @@ const GuestDetailsView = ({ navigate, params }) => {
                       />
                     </Box>
                   </Grid>
-                  <Grid item xs={12} sm={4}>
+                  <Grid item xs={12} sm={12}>
                     <Box>
                       <TextField
                         label="Contact number"
@@ -201,7 +200,7 @@ const GuestDetailsView = ({ navigate, params }) => {
                       />
                     </Box>
                   </Grid>
-                  <Grid item xs={12} sm={4}>
+                  {/* <Grid item xs={12} sm={4}>
                     <Box>
                       <TextField
                         label="No. Guest"
@@ -228,7 +227,7 @@ const GuestDetailsView = ({ navigate, params }) => {
                         }
                       />
                     </Box>
-                  </Grid>
+                  </Grid> */}
                 </Grid>
                 <Grid
                   container

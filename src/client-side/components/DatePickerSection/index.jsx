@@ -67,6 +67,13 @@ const useStyles = makeStyles(
         color: "#f15d30",
         fontWeight: 600,
       },
+      guest_input: {
+        border: "none !important",
+        fontSize: "20px",
+        "&:focus": {
+          outline: "none",
+        },
+      },
     };
   },
   { name: "DatePickerSection" }
@@ -81,6 +88,7 @@ const DatePickerSection = (props) => {
     check_in: "" || bookingState.check_in,
     check_out: "" || bookingState.check_out,
   });
+  const [noGuest, setNoGuest] = React.useState(1);
   const breakPointSm = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleSubmitDate = () => {
@@ -88,6 +96,11 @@ const DatePickerSection = (props) => {
       bookingDispatch({
         type: "SET_DATES",
         payload: dates,
+      });
+
+      bookingDispatch({
+        type: "SET_GUEST_NO",
+        payload: noGuest,
       });
       navigate(bookingSectionUrl + bookingSelectRooms);
     }
@@ -98,7 +111,7 @@ const DatePickerSection = (props) => {
       <Container className={classes.container}>
         <Box>
           <Grid container>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={3}>
               <Card
                 className={`${classes.card} ${
                   breakPointSm ? classes.cardBorderLg : classes.cardBorderSm
@@ -120,7 +133,7 @@ const DatePickerSection = (props) => {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={3}>
               <Card
                 className={`${classes.card} ${
                   breakPointSm ? classes.cardBorderLg : classes.cardBorderSm
@@ -144,11 +157,35 @@ const DatePickerSection = (props) => {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item xs={12} sm={4} onClick={() => handleSubmitDate()}>
+            <Grid item xs={12} sm={3}>
+              <Card
+                className={`${classes.card} ${
+                  breakPointSm ? classes.cardBorderLg : classes.cardBorderSm
+                }`}
+              >
+                <CardContent className={classes.cardContent}>
+                  <Typography
+                    className={classes.label}
+                    variant="g5"
+                    gutterBottom={true}
+                  >
+                    GUESTS
+                  </Typography>
+                  <input
+                    className={classes.guest_input}
+                    type="number"
+                    defaultValue={1}
+                    min={1}
+                    onChange={(e) => setNoGuest(e.currentTarget.value)}
+                  />
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={12} sm={3} onClick={() => handleSubmitDate()}>
               <Card
                 className={classNames(classes.cardButton, {
                   // [classes.cardButton]: () => !hasNull(dates),
-                  [classes.cardButtonDisabled]: hasNull(dates),
+                  [classes.cardButtonDisabled]: hasNull(dates) || !noGuest,
                 })}
                 style={{ height: "110px" }}
               >
