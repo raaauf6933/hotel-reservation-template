@@ -1,3 +1,4 @@
+import { Box, Typography } from "@mui/material";
 import React from "react";
 import { currencyFormat } from "../../utils/formatter";
 
@@ -8,37 +9,46 @@ const Room = (room) => {
         <span
           class="img"
           style={{
-            backgroundImage: `url(${room.image})`,
+            backgroundImage: `url(${room.image[0].src})`,
           }}
         >
           <span class="price">{currencyFormat(room.price)} / Night</span>
         </span>
         <div class="text p-4">
-          <h3>{room.roomName}</h3>
-          {/* <p class="location">
-            <span class="fa fa-map-marker"></span> {room.roomName}
-          </p> */}
-          {/* <ul>
-            <li>
-              <span class="flaticon-shower"></span>
-              {room.noShower}
-            </li>
-            <li>
-              <span class="flaticon-king-size"></span>
-              {room.noBeds}
-            </li>
-         
-          </ul> */}
-          <span class="days">- {room.maxPerson} Max Person</span>
-          <br />
-          {room?.description &&
-            room.description.map((e) => {
-              return (
-                <>
-                  <span class="days">- {e}</span> <br />
-                </>
-              );
-            })}
+          <Typography variant="h6">{room.roomName}</Typography>
+          <Box padding="5px">
+            {room.maxPerson && (
+              <Typography variant="caption">
+                <span class="days">- Good for {room.maxPerson}</span>
+              </Typography>
+            )}
+            <br />
+            {room.noBeds && (
+              <Typography variant="caption">
+                <span class="days">- {room.noBeds} no. of beds</span>
+              </Typography>
+            )}
+            <br />
+            {room.noShower && (
+              <Typography variant="caption">
+                <span class="days">- {room.noShower} bathroom</span>
+              </Typography>
+            )}
+            {room?.description &&
+              room.description.map((e) => {
+                return (
+                  <>
+                    <Typography variant="caption">
+                      <span class="days">- {e}</span>
+                    </Typography>{" "}
+                    <br />
+                  </>
+                );
+              })}
+          </Box>
+          <Typography variant="h6" fontWeight="lighter">
+            {currencyFormat(room.price)} / Night
+          </Typography>
         </div>
       </div>
     </div>

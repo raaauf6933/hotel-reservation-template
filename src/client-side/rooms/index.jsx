@@ -6,8 +6,16 @@ import RoomSection from "../components/RoomSection";
 import { WindowTitle } from "../../admin/components/WindowTitle/WindowTitle";
 import { resortName } from "./../../config";
 import AppLayout from "../components/AppLayout";
+import useFetch from "../hooks/useFetch";
+import { GET_ROOM_TYPES } from "./api";
 
 const Rooms = () => {
+  const { response } = useFetch({
+    url: GET_ROOM_TYPES,
+  });
+
+  const rooms = response?.data ? response?.data : [];
+
   return (
     <>
       <AppLayout>
@@ -19,7 +27,7 @@ const Rooms = () => {
         </Hero>
         <AppContainer>
           <div className="mt-5"></div>
-          <RoomSection showAll={true} />
+          <RoomSection showAll={true} rooms={rooms} />
           {/* <Grid container spacing={3}>
           <Grid></Grid>
           <Grid></Grid>

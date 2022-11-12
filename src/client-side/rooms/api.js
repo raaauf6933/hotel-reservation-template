@@ -1,0 +1,1 @@
+export const GET_ROOM_TYPES = "api/admin/room_types";
