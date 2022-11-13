@@ -33,6 +33,7 @@ const RoomTypeUpdateDetailsPage = (props) => {
     room_rate: 1,
     isAircon: true,
     isKitchen: true,
+    description: "",
     status: "ACT",
   };
 

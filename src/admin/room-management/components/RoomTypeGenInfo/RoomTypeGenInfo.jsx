@@ -120,6 +120,18 @@ const RoomTypeGenInfo = (props) => {
                 fullWidth
               /> */}
             </Grid>
+            <Grid xs={12} sm={12} md={12} item>
+              <TextField
+                label="Description"
+                variant="outlined"
+                name="description"
+                value={data?.description}
+                onChange={change}
+                multiline
+                rows={4}
+                fullWidth
+              />
+            </Grid>
             <Grid xs={12} sm={4} md={4} item>
               {/* <Box display="flex" justifyContent="space-between"> */}
               <FormControl>

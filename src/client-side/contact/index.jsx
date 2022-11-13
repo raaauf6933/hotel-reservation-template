@@ -125,7 +125,7 @@ const Contact = (props) => {
                     Contact Number:
                   </Typography>
                   <Typography variant="h5" marginLeft="2em">
-                    - <a href="tel:09066000801">(63) 9066 000801</a>
+                    - <a href="tel:09495633656">63 949 563 3656</a>
                   </Typography>
                 </div>
                 <div className={classes.infoSection}>

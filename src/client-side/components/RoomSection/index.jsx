@@ -21,6 +21,7 @@ const RoomSection = (props) => {
       roomName: e.name,
       noBeds: e.details.no_bed,
       noShower: e.details.no_bath,
+      description: e.details.description,
     }));
 
   return (

@@ -250,6 +250,13 @@ const RoomItems = (props) => {
               ) : null}
             </Typography>
           </div>
+          {details?.description ? (
+            <div>
+              <span>Description</span>
+              <Typography>- {details?.description} </Typography>
+            </div>
+          ) : null}
+
           <div className={classes.roomFooter}>
             <Typography variant="h6">
               <span className={classes.roomAmount}>

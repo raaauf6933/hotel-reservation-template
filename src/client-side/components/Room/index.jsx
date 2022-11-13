@@ -9,7 +9,7 @@ const Room = (room) => {
         <span
           class="img"
           style={{
-            backgroundImage: `url(${room.image[0].src})`,
+            backgroundImage: `url(${room?.image[0]?.src})`,
           }}
         >
           <span class="price">{currencyFormat(room.price)} / Night</span>
@@ -34,7 +34,8 @@ const Room = (room) => {
                 <span class="days">- {room.noShower} bathroom</span>
               </Typography>
             )}
-            {room?.description &&
+            <br />
+            {/* {room?.description &&
               room.description.map((e) => {
                 return (
                   <>
@@ -44,7 +45,11 @@ const Room = (room) => {
                     <br />
                   </>
                 );
-              })}
+              })} */}
+            <Typography variant="caption">
+              <span class="days">- {room.description}</span>
+            </Typography>{" "}
+            <br />
           </Box>
           <Typography variant="h6" fontWeight="lighter">
             {currencyFormat(room.price)} / Night

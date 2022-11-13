@@ -42,6 +42,7 @@ const RoomTypeUpdateDetailsPage = (props) => {
     no_bath: maybe(() => roomType?.details?.no_bath, 1),
     isAircon: maybe(() => roomType?.details?.isAircon, false),
     isKitchen: maybe(() => roomType?.details?.isKitchen, false),
+    description: maybe(() => roomType?.details?.description, ""),
     status: maybe(() => roomType?.status, "ACT"),
   };
 

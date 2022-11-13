@@ -18,7 +18,8 @@ import { resortName } from "./../../config";
 import bookingContext from "../context/booking/bookingContext";
 import AppLayout from "../components/AppLayout";
 import ReviewsSection from "../components/ReviewsSection";
-import { Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
+import covid_img from "../../assets/images/covid_img.jpeg";
 
 const Home = () => {
   const { navbarDispatch } = React.useContext(navbarContext);
@@ -41,6 +42,57 @@ const Home = () => {
 
           <DatePickerSection />
           <ServiceSection />
+          <div
+            style={{
+              paddingTop: "2em",
+              paddingBottom: "2em",
+            }}
+          >
+            <div
+              style={{
+                title: {
+                  padding: "2em",
+                },
+                paddingBottom: "5em",
+              }}
+            >
+              <Typography variant="h2" textAlign="center">
+                Covid Guidelines
+              </Typography>
+            </div>
+
+            <Grid container>
+              <Grid item sm={12} md={6} lg={6}>
+                <img src={covid_img}></img>
+              </Grid>
+
+              <Grid item sm={12} md={6} lg={6}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: "4em",
+                  }}
+                >
+                  <div>
+                    <Typography variant="h5">
+                      As we realize the need to adjust to the current situation,
+                      our team is tirelessly working to ensure that we uphold
+                      your overall well-being while inside the resort.
+                    </Typography>
+                    <br />
+                    <Typography variant="h5">
+                      Our hotel operations slowly transition, we have
+                      implemented the following important guidelines based on
+                      the recommendation of the Department of Tourism
+                    </Typography>
+                  </div>
+                </div>
+              </Grid>
+            </Grid>
+          </div>
+
           <ReviewsSection />
           <div
             style={{
