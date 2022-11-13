@@ -35,9 +35,9 @@ const SelectRooms = ({ params, navigate }) => {
       const result = await apiAxios({
         url: GET_AVAILABLE_ROOMTYPE,
         method: "POST",
-        params: {
-          guest: bookingState.guest.no_guest,
-        },
+        // params: {
+        //   guest: bookingState.guest.no_guest,
+        // },
         data: dates,
       });
 
