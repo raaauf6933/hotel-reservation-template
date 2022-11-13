@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/iframe-has-title */
-import React from "react";
+import React, { useState } from "react";
 import { WindowTitle } from "../../admin/components/WindowTitle/WindowTitle";
 import { Grid, Button, CardContent, Card } from "@mui/material";
 import { resortName } from "./../../config";
@@ -12,6 +12,8 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { makeStyles } from "@mui/styles";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import EmailIcon from "@mui/icons-material/Email";
+import useMutate from "../hooks/useMutate";
+import { useSnackbar } from "notistack";
 
 const useStyles = makeStyles(
   () => ({
@@ -28,6 +30,38 @@ const useStyles = makeStyles(
 
 const Contact = (props) => {
   const classes = useStyles(props);
+  const { enqueueSnackbar } = useSnackbar();
+  const [form, setForm] = useState({
+    name: "",
+    subject: "",
+    email: "",
+    message: "",
+  });
+
+  const [sendEmailSupport, sendEmailSupportOpts] = useMutate({
+    onComplete: () => {
+      enqueueSnackbar("Your message has been successfully sent!", {
+        variant: "success",
+      });
+
+      setForm({
+        name: "",
+        subject: "",
+        email: "",
+        message: "",
+      });
+    },
+  });
+
+  const handleSubmit = () => {
+    sendEmailSupport({
+      url: "api/admin/about_us/send_support_email",
+      data: {
+        ...form,
+      },
+    });
+  };
+
   return (
     <AppLayout>
       {" "}
@@ -55,14 +89,37 @@ const Contact = (props) => {
                   >
                     Get in Touch
                   </Typography>
-                  <TextField label="Name" margin="dense" />
-                  <TextField label="Email" margin="dense" />
-                  <TextField label="Subject" margin="dense" />
+                  <TextField
+                    label="Name"
+                    margin="dense"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  />
+                  <TextField
+                    label="Email"
+                    margin="dense"
+                    value={form.email}
+                    onChange={(e) =>
+                      setForm({ ...form, email: e.target.value })
+                    }
+                  />
+                  <TextField
+                    label="Subject"
+                    margin="dense"
+                    value={form.subject}
+                    onChange={(e) =>
+                      setForm({ ...form, subject: e.target.value })
+                    }
+                  />
                   <TextField
                     label="Message"
                     margin="dense"
+                    value={form.message}
                     multiline
                     rows={4}
+                    onChange={(e) =>
+                      setForm({ ...form, message: e.target.value })
+                    }
                   />
                   <Box textAlign="center" marginTop="1em">
                     <Button
@@ -76,6 +133,14 @@ const Contact = (props) => {
                           outlineColor: "#f15d30b3",
                         },
                       }}
+                      onClick={handleSubmit}
+                      disabled={
+                        sendEmailSupportOpts.loading ||
+                        !form.email ||
+                        !form.message ||
+                        !form.name ||
+                        !form.subject
+                      }
                     >
                       Send Message
                     </Button>

@@ -16,6 +16,7 @@ const useMutate = (props) => {
 
     // params
     const Params = {
+      method: "POST",
       ...params,
     };
 
