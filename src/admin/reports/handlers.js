@@ -1,5 +1,6 @@
 import moment from "moment";
 import { currencyFormat } from "./../../misc";
+import { logo_vi } from "./img";
 
 export const createBookingTypeChoices = () => {
   return [
@@ -122,11 +123,31 @@ const createDataRows = (data) => {
 export const dd = (data, formData, user) => {
   const { bookings, billing } = data;
   return {
+    footer: {
+      margin: [5, 15, 10, 5],
+      height: 30,
+      columns: [
+        {
+          alignment: "right",
+          text: [
+            {
+              text: `PREPARED BY : ${user.first_name} ${user.last_name} `,
+              italics: true,
+            },
+          ],
+        },
+      ],
+    },
     content: [
       {
         alignment: "justify",
         columns: [
           {
+            image: logo_vi,
+            width: 50,
+          },
+          {
+            margin: [0, 10, 0, 0],
             text: "Villa Gregoria Resort",
             style: "header",
           },
@@ -138,18 +159,16 @@ export const dd = (data, formData, user) => {
       },
       "\n",
       {
-        text: `FROM : ${moment(formData.from).format("LL")}`,
+        text: `FROM : ${moment(formData.from).format("LL").toLowerCase()}`,
         style: "title1",
       },
       {
-        text: `TO : ${moment(formData.to).format("LL")}`,
+        text: `TO : ${moment(formData.to).format("LL").toLocaleLowerCase()}`,
         style: "title1",
       },
       "\n",
-      {
-        text: `PREPARED BY: ${user.first_name} ${user.last_name}`,
-        style: "title1",
-      },
+
+      "",
       {
         style: "tableExample",
         margin: [0, 10, 10, 10],
@@ -203,23 +222,20 @@ export const dd = (data, formData, user) => {
       {
         margin: [0, 20, 0, 0],
         text: `Number of Booking : ${billing.no_bookings}`,
-        style: "title2",
       },
       {
         margin: [0, 10, 0, 0],
         text: `Number of Guest : ${billing.no_guest}`,
-        style: "title2",
       },
       {
         margin: [0, 10, 0, 0],
         alignment: "justify",
         columns: [
           {
-            text: "Vatable :",
-            style: "total_currency",
+            text: `Vatable : ${currencyFormat(billing.vatable)}`,
           },
           {
-            text: `${currencyFormat(billing.vatable)}`,
+            text: ``,
             style: "date",
           },
         ],
@@ -229,11 +245,10 @@ export const dd = (data, formData, user) => {
         alignment: "justify",
         columns: [
           {
-            text: "VAT :",
-            style: "total_currency",
+            text: `VAT: ${currencyFormat(billing.vat)}`,
           },
           {
-            text: `${currencyFormat(billing.vat)}`,
+            text: "",
             style: "date",
           },
         ],
@@ -243,11 +258,10 @@ export const dd = (data, formData, user) => {
         alignment: "justify",
         columns: [
           {
-            text: "Total Amount :",
-            style: "total_currency",
+            text: `Total Amount: ${currencyFormat(billing.total_amount)}`,
           },
           {
-            text: `${currencyFormat(billing.total_amount)}`,
+            text: ``,
             style: "date",
           },
         ],
@@ -257,11 +271,11 @@ export const dd = (data, formData, user) => {
         alignment: "justify",
         columns: [
           {
-            text: "Total Sales :",
+            text: `Total Sales: ${currencyFormat(billing.total_sales)}`,
             style: "total_currency",
           },
           {
-            text: `${currencyFormat(billing.total_sales)}`,
+            text: ``,
             style: "date",
           },
         ],
@@ -304,6 +318,6 @@ export const dd = (data, formData, user) => {
       columnGap: 20,
     },
     pageOrientation: "landscape",
-    pageMargins: [20, 20, 20, 10],
+    // pageMargins: [20, 20, 20, 10],
   };
 };
