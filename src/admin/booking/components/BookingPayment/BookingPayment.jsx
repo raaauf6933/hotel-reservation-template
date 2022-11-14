@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent, CardHeader, Divider } from "@mui/material";
+import { Button, Card, CardContent, CardHeader, Divider } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { currencyFormat, getNoNights } from "./../../../../misc";
 // import PaymentsIcon from "@mui/icons-material/Payments";
@@ -33,18 +33,34 @@ const useStyles = makeStyles(
 
 const BookingPayment = (props) => {
   const classes = useStyles(props);
-  const { billing, booking, onAddDiscount } = props;
+  const { billing, booking, onAddDiscount, onNotifyGuest } = props;
 
   return (
     <Card>
       <CardHeader
         className={classes.cardHeader}
         title="Payment Details"
-        action={createAddDiscountBtn(
-          booking?.status,
-          billing?.discount?.amount,
-          onAddDiscount
-        )}
+        action={
+          <>
+            {createAddDiscountBtn(
+              booking?.status,
+              billing?.discount?.amount,
+              onAddDiscount
+            )}
+            <Button
+              variant="outlined"
+              color="success"
+              sx={{
+                color: "white",
+                borderColor: "white",
+              }}
+              style={{ outline: "none", marginLeft: "1em" }}
+              onClick={onNotifyGuest}
+            >
+              Notify Email (insufficient DP)
+            </Button>
+          </>
+        }
       />
       <CardContent>
         <div className={classes.flexGrid}>

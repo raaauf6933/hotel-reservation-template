@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 
 const ConfirmationDialog = (props) => {
-  const { open, onClose, message, onSubmit } = props;
+  const { open, onClose, message, onSubmit, title } = props;
 
   const handleSubmit = () => {
     onSubmit();
@@ -18,7 +18,7 @@ const ConfirmationDialog = (props) => {
   return (
     <>
       <Dialog fullWidth maxWidth="xs" open={open} onClose={() => onClose()}>
-        <DialogTitle>Confirmation</DialogTitle>
+        <DialogTitle>{title ? title : "Confirmation"}</DialogTitle>
         <DialogContent dividers>{message}</DialogContent>
         <DialogActions>
           <Button variant="outlined" onClick={() => onClose()}>

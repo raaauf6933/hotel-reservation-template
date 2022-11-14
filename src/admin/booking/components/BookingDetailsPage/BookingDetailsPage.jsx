@@ -55,6 +55,7 @@ const BookingDetailsPage = (props) => {
     onAddAmenity,
     onAddDiscount,
     onBack,
+    onNotifyGuest,
   } = props;
   const classes = useStyles(props);
 
@@ -137,6 +138,7 @@ const BookingDetailsPage = (props) => {
                 booking={booking}
                 billing={booking?.billing}
                 onAddDiscount={onAddDiscount}
+                onNotifyGuest={onNotifyGuest}
               />
             </div>
             <div className={classes.section}>
@@ -171,6 +173,10 @@ const BookingDetailsPage = (props) => {
           booking?.status
         )}
         onClickSave={() => submitHandlers()}
+        disabled={
+          !booking?.events?.some((e) => e.type === "GUEST_IMAGE_UPLOAD") &&
+          booking?.status === "PENDING"
+        }
       />
     </>
   );

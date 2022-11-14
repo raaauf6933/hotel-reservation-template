@@ -21,6 +21,7 @@ import BookingDiscountDialog from "../../components/BookingDiscountDialog";
 import { useSnackbar } from "notistack";
 import { GET_AMENITIES } from "./../../../amenities/api";
 import { GET_DISCOUNTS } from "./../../../discounts/api";
+import useMutate from "../../../../client-side/hooks/useMutate";
 
 const BookingDetails = () => {
   const { id } = useParams();
@@ -193,6 +194,26 @@ const BookingDetails = () => {
     }
   };
 
+  const [notifyGuest] = useMutate({
+    onComplete: () => {
+      enqueueSnackbar("Email has been sent", {
+        variant: "success",
+      });
+
+      closeModal();
+    },
+  });
+
+  const handleNotifyGuest = () => {
+    notifyGuest({
+      url: "api/admin/email/notify_guest",
+      data: {
+        id,
+        email: booking?.guest?.email,
+      },
+    });
+  };
+
   return (
     <>
       <BookingDetailsPage
@@ -207,6 +228,7 @@ const BookingDetails = () => {
         onAddAmenity={() => openModal("onAddAmenity")}
         onAddDiscount={() => openModal("onAddDiscount")}
         onBack={() => navigate("/admin/bookings")}
+        onNotifyGuest={() => openModal("onNotifyGuest")}
       />
       <ConfirmBookingDialog
         open={params.action === "onConfirmBooking"}
@@ -228,6 +250,18 @@ const BookingDetails = () => {
         onSubmit={() =>
           UpdateStatus({ id: booking?._id, status: booking?.status })
         }
+      />
+      <ConfirmationDialog
+        title="Notify Guest"
+        open={params.action === "onNotifyGuest"}
+        onClose={closeModal}
+        message={
+          <span>
+            Are you sure you want to notify guest for{" "}
+            <strong>insufficient payment?</strong>
+          </span>
+        }
+        onSubmit={() => handleNotifyGuest()}
       />
       <ImagePreviewDialog
         imageSrc={params.receiptImage}

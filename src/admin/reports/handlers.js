@@ -23,6 +23,10 @@ export const createBookingTypeChoices = () => {
       label: "Checkout",
       value: "CHECK_OUT",
     },
+    {
+      label: "Canceled",
+      value: "CANCELLED",
+    },
   ];
 };
 

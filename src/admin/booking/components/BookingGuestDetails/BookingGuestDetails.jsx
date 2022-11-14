@@ -50,7 +50,7 @@ const BookingGuestDetails = (props) => {
         title="Guest Details"
         action={
           <>
-            {booking.status === "PENDING" ? (
+            {booking.status === "PENDING" || booking.status === "CONFIRMED" ? (
               <Button
                 variant="outlined"
                 color="error"
