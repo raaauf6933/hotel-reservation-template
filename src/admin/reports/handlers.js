@@ -102,11 +102,15 @@ const createDataRows = (data) => {
         style: "tableBody",
       },
       {
-        text: `${currencyFormat(payment_amount)}`,
+        text: `${currencyFormat(payment_amount, {
+          removeSign: true,
+        })}`,
         style: "tableBody",
       },
       {
-        text: `${currencyFormat(booking.billing.total_amount)}`,
+        text: `${currencyFormat(booking.billing.total_amount, {
+          removeSign: true,
+        })}`,
         style: "tableBody",
       },
     ];
@@ -232,7 +236,9 @@ export const dd = (data, formData, user) => {
         alignment: "justify",
         columns: [
           {
-            text: `Vatable : ${currencyFormat(billing.vatable)}`,
+            text: `Vatable : ${currencyFormat(billing.vatable, {
+              removeSign: true,
+            })}`,
           },
           {
             text: ``,
@@ -245,7 +251,9 @@ export const dd = (data, formData, user) => {
         alignment: "justify",
         columns: [
           {
-            text: `VAT: ${currencyFormat(billing.vat)}`,
+            text: `VAT: ${currencyFormat(billing.vat, {
+              removeSign: true,
+            })}`,
           },
           {
             text: "",
@@ -258,7 +266,9 @@ export const dd = (data, formData, user) => {
         alignment: "justify",
         columns: [
           {
-            text: `Total Amount: ${currencyFormat(billing.total_amount)}`,
+            text: `Total Amount: ${currencyFormat(billing.total_amount, {
+              removeSign: true,
+            })}`,
           },
           {
             text: ``,
