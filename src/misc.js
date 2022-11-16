@@ -36,12 +36,12 @@ export const paginate = (items, pageNumber, pageSize) => {
   return array;
 };
 
-export const currencyFormat = (number, { removeSign }) => {
+export const currencyFormat = (number, params) => {
   const formatter = new Intl.NumberFormat("en-PH", {
     currency: "PHP",
     currencyDisplay: "code",
     minimumFractionDigits: 2,
-    ...(removeSign ? {} : { style: "currency" }),
+    ...(params?.removeSign ? {} : { style: "currency" }),
   });
 
   return formatter.format(number);
